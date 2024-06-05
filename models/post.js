@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const createPost = (data, cf) => {
   prisma.post
     .create({ data })
-    .then((newPost) => cf(newPost))
+    .then((p) => cf(p))
     .catch((err) => console.error(err));
 };
 
@@ -52,8 +52,17 @@ const readPosts = (cf) => {
     .catch((err) => console.error(err));
 };
 
+// modifica di un post
+const updatePostById = (slug, data, cf) => {
+  prisma.post
+    .update({ where: { slug }, data })
+    .then((p) => cf(p))
+    .catch((err) => console.error(err));
+};
+
 module.exports = {
   createPost,
   readPostById,
   readPosts,
+  updatePostById,
 };
