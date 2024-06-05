@@ -60,9 +60,18 @@ const updatePostById = (slug, data, cf) => {
     .catch((err) => console.error(err));
 };
 
+// cancellazione di un post
+const deletePostById = (slug, cf) => {
+  prisma.pizza
+    .delete({ where: { slug } })
+    .then((p) => cf(p))
+    .catch((err) => console.error(err));
+};
+
 module.exports = {
   createPost,
   readPostById,
   readPosts,
   updatePostById,
+  deletePostById,
 };
